@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyExam | امتحاناتي</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">M</span><div><strong>MyExam</strong><small>مساحتك للتعلّم</small></div></div>
+    <nav>
+      <button class="nav-link active" data-view="dashboard"><span>▦</span> الرئيسية</button>
+      <button class="nav-link" data-view="exams"><span>▤</span> امتحاناتي</button>
+      <button class="nav-link" data-view="results"><span>◷</span> سجل النتائج</button>
+    </nav>
+    <div class="sidebar-note"><span class="dot"></span> بياناتك محفوظة على هذا الجهاز</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><p class="eyebrow">مساحة الدراسة الشخصية</p><h1 id="page-title">أهلًا بك في MyExam</h1></div>
+      <button class="btn btn-primary" id="quick-add">＋ إنشاء امتحان</button>
+    </header>
+
+    <section id="dashboard-view" class="view">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="pill">خطوة بخطوة نحو التفوق</span>
+          <h2>تدرّب بذكاء،<br><span>وتابع تقدّمك.</span></h2>
+          <p>أنشئ امتحاناتك بنفسك، اختبر معلوماتك، وراجع إجاباتك بعد كل محاولة.</p>
+          <button class="btn btn-light" id="hero-add">ابدأ بإنشاء امتحان <span>←</span></button>
+        </div>
+        <div class="hero-art" aria-hidden="true"><div class="orb"></div><div class="paper"><div class="paper-top"></div><i></i><i></i><i></i><div class="check">✓</div></div><div class="floating f-one">+ 5 درجات</div><div class="floating f-two">✓ إجابة صحيحة</div></div>
+      </div>
+      <div class="section-heading"><div><p class="eyebrow">نظرة عامة</p><h2>ملخص نشاطك</h2></div></div>
+      <div class="stats-grid">
+        <article class="stat-card"><div class="stat-icon purple">▤</div><div><p>إجمالي الامتحانات</p><strong id="stat-exams">0</strong></div></article>
+        <article class="stat-card"><div class="stat-icon blue">✓</div><div><p>مرات الحل</p><strong id="stat-attempts">0</strong></div></article>
+        <article class="stat-card"><div class="stat-icon green">％</div><div><p>متوسط النتائج</p><strong id="stat-average">—</strong></div></article>
+      </div>
+      <div class="section-heading"><div><p class="eyebrow">ابدأ المراجعة</p><h2>أحدث الامتحانات</h2></div><button class="text-btn" data-goto="exams">عرض الكل ←</button></div>
+      <div id="recent-exams" class="exam-grid"></div>
+    </section>
+
+    <section id="exams-view" class="view hidden">
+      <div class="section-heading"><div><p class="eyebrow">مكتبتك</p><h2>كل الامتحانات</h2><p class="muted">أنشئ امتحانًا ثم أضف إليه الأسئلة.</p></div><button class="btn btn-primary" id="new-exam">＋ إنشاء امتحان</button></div>
+      <div id="all-exams" class="exam-grid"></div>
+    </section>
+
+    <section id="results-view" class="view hidden">
+      <div class="section-heading"><div><p class="eyebrow">تابع تطوّرك</p><h2>سجل النتائج</h2><p class="muted">كل محاولة محفوظة على هذا المتصفح.</p></div></div>
+      <div id="results-list" class="results-list"></div>
+    </section>
+
+    <section id="manage-view" class="view hidden">
+      <button class="text-btn back-btn" data-goto="exams">→ العودة للامتحانات</button>
+      <div class="section-heading"><div><p class="eyebrow">إدارة الامتحان</p><h2 id="manage-title">اسم الامتحان</h2><p class="muted" id="manage-meta"></p></div><button class="btn btn-primary" id="add-question-btn">＋ إضافة سؤال</button></div>
+      <div class="manage-toolbar"><button class="btn btn-primary" id="start-exam-btn">ابدأ الامتحان ←</button><button class="btn btn-secondary" id="edit-exam-btn">تعديل بيانات الامتحان</button><button class="btn btn-danger-outline" id="delete-exam-btn">حذف الامتحان</button></div>
+      <div id="question-list" class="question-list"></div>
+    </section>
+
+    <section id="quiz-view" class="view hidden">
+      <div class="quiz-top"><button class="text-btn" id="quit-quiz">✕ إنهاء المحاولة</button><div class="timer" id="quiz-timer">∞ بدون مؤقت</div></div>
+      <div class="progress-line"><span id="quiz-progress"></span></div>
+      <div class="quiz-layout"><div class="quiz-main"><div class="question-meta"><span class="pill" id="quiz-type">اختيار من متعدد</span><span id="question-number">السؤال 1 من 1</span></div><h2 id="quiz-question">نص السؤال</h2><div id="quiz-answer-area"></div><div class="quiz-controls"><button class="btn btn-secondary" id="prev-question">السابق</button><button class="btn btn-primary" id="next-question">التالي ←</button></div></div><aside class="quiz-side"><h3>أسئلة الامتحان</h3><div id="question-jump" class="question-jump"></div><p class="muted small">تقدر تتنقل بين الأسئلة قبل التسليم.</p><button class="btn btn-success full" id="submit-quiz">تسليم الامتحان</button></aside></div>
+    </section>
+
+    <section id="result-view" class="view hidden">
+      <div id="result-summary" class="result-summary"></div>
+      <div class="section-heading"><div><p class="eyebrow">مراجعة المحاولة</p><h2>إجاباتك بالتفصيل</h2><p class="muted">يمكنك تقييم إجابات الأسئلة المقالية يدويًا.</p></div></div>
+      <div id="review-list" class="review-list"></div>
+      <div class="result-actions"><button class="btn btn-primary" id="back-to-exam">العودة للامتحان</button><button class="btn btn-secondary" data-goto="results">عرض سجل النتائج</button></div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop hidden" id="exam-modal">
+    <form class="modal" id="exam-form">
+      <div class="modal-head"><div><p class="eyebrow">إعداد جديد</p><h2 id="exam-modal-title">إنشاء امتحان</h2></div><button type="button" class="icon-btn" data-close="exam-modal">✕</button></div>
+      <label>اسم الامتحان<input id="exam-name" required maxlength="70" placeholder="مثال: فيزياء - الحركة"></label>
+      <label>المادة<input id="exam-subject" required maxlength="50" placeholder="مثال: الفيزياء"></label>
+      <label>مدة الامتحان بالدقائق <span class="optional">(اختياري، اتركه فارغًا بدون مؤقت)</span><input id="exam-duration" type="number" min="1" max="600" placeholder="مثال: 30"></label>
+      <div class="modal-actions"><button type="button" class="btn btn-secondary" data-close="exam-modal">إلغاء</button><button class="btn btn-primary" type="submit">حفظ الامتحان</button></div>
+    </form>
+  </div>
+
+  <div class="modal-backdrop hidden" id="question-modal">
+    <form class="modal wide-modal" id="question-form">
+      <div class="modal-head"><div><p class="eyebrow">بنك الأسئلة</p><h2 id="question-modal-title">إضافة سؤال</h2></div><button type="button" class="icon-btn" data-close="question-modal">✕</button></div>
+      <label>نوع السؤال<select id="question-type"><option value="mcq">اختيار من متعدد</option><option value="essay">مقالي</option></select></label>
+      <label>نص السؤال<textarea id="question-text" rows="3" required maxlength="1500" placeholder="اكتب السؤال هنا..."></textarea></label>
+      <div id="mcq-fields">
+        <label>الاختيار الأول<input id="option-0" maxlength="300" placeholder="الاختيار الأول"></label>
+        <label>الاختيار الثاني<input id="option-1" maxlength="300" placeholder="الاختيار الثاني"></label>
+        <label>الاختيار الثالث<input id="option-2" maxlength="300" placeholder="الاختيار الثالث (اختياري)"></label>
+        <label>الاختيار الرابع<input id="option-3" maxlength="300" placeholder="الاختيار الرابع (اختياري)"></label>
+        <label>الإجابة الصحيحة<select id="correct-option"><option value="0">الاختيار الأول</option><option value="1">الاختيار الثاني</option><option value="2">الاختيار الثالث</option><option value="3">الاختيار الرابع</option></select></label>
+      </div>
+      <div id="tf-fields" class="hidden"><label>الإجابة الصحيحة<select id="correct-tf"><option value="true">صح</option><option value="false">خطأ</option></select></label></div>
+      <div id="essay-fields" class="hidden"><label>الإجابة النموذجية / نقاط التصحيح<textarea id="model-answer" rows="3" maxlength="1500" placeholder="اكتب الإجابة النموذجية..."></textarea></label></div>
+      <div class="form-row"><label>الدرجة<input id="question-points" type="number" required min="1" max="100" value="1"></label><label>ملاحظة أو شرح (اختياري)<input id="question-explanation" maxlength="600" placeholder="توضيح الإجابة"></label></div>
+      <p class="form-hint">الأسئلة المقالية تُقيَّم يدويًا بعد التسليم، أما الاختيار من متعدد والصح والخطأ فيتم تصحيحهما تلقائيًا.</p>
+      <div class="modal-actions"><button type="button" class="btn btn-secondary" data-close="question-modal">إلغاء</button><button class="btn btn-primary" type="submit">حفظ السؤال</button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
